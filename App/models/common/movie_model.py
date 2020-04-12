@@ -3,7 +3,7 @@ from App.models import BaseModel
 
 
 class Movie(BaseModel):
-    __tablename__ = 'movies'
+    __tablename__ = 'common_movies'
     showname = db.Column(db.String(128))
     shownameen = db.Column(db.String(128))
     director = db.Column(db.String(64))
@@ -17,3 +17,5 @@ class Movie(BaseModel):
     backgroundpicture = db.Column(db.String(256))
     flag = db.Column(db.Boolean,default=False)
     is_delete = db.Column(db.Boolean,default=False)
+
+    flight = db.relationship('Flight',backref='Movie',lazy=True)

@@ -1,49 +1,21 @@
 from flask import request
-from flask_restful import Resource, reqparse, fields, abort, marshal
+from flask_restful import Resource, abort, marshal
 
 from App.apis.admin.admin_user_utils import login_require
 from App.apis.apis_constant import HTTP_CREATE_OK, HTTP_OK
-from App.apis.common.movie_utils import filename_transfer
+from App.apis.common.movie_utils import filename_transfer, parse, single_movie_fields, multi_movies_fields
 from App.models.common.movie_model import Movie
-from App.settings import FILE_PATH_PREFIX, UPLOADS_DIR
 
-parse = reqparse.RequestParser()
-parse.add_argument('showname',required=True,help='must supply showname')
-parse.add_argument('shownameen',required=True,help='must supply shownameen')
-parse.add_argument('director',required=True,help='must supply director')
-parse.add_argument('leadingRole',required=True,help='must supply leadingRole')
-parse.add_argument('type',required=True,help='must supply type')
-parse.add_argument('country',required=True,help='must supply country')
-parse.add_argument('language',required=True,help='must supply language')
-parse.add_argument('duration',required=True,help='must supply duration')
-parse.add_argument('screen',required=True,help='must supply screen')
-parse.add_argument('openday',required=True,help='must supply openday')
-# parse.add_argument('backgroundpicture',required=True,help='must supply backgroundpicture')
-
-
-movie_fields = {
-    'showname':fields.String,
-    'shownameen':fields.String,
-    'director':fields.String,
-    'leadingRole':fields.String,
-    'type':fields.String,
-    'country':fields.String,
-    'language':fields.String,
-    'duration':fields.String,
-    'screen':fields.String,
-    'openday':fields.DateTime,
-    'backgroundpicture':fields.String
-}
-
-single_movie_fields = {
-    'status':fields.Integer,
-    'msg':fields.String,
-    'data':fields.Nested(movie_fields)
-}
 
 class MoviesResource(Resource):
     def get(self):
-        return {'msg':'get ok'}
+        movies = Movie.query.all()
+        data = {
+            'status':HTTP_OK,
+            'msg':'获取所有电影成功',
+            'data':movies
+        }
+        return marshal(data,multi_movies_fields)
 
     @login_require #admin后端账户登录
     def post(self):

@@ -1,8 +1,8 @@
 import uuid
 
-MOVIE_USER = 'movie_user'
+MOVIE_USER = 'user'
 ADMIN_USER = 'admin_user'
-CINEMA_USER = 'cinema_admin'
+CINEMA_USER = 'cinema'
 
 def generate_token(prefix=None):
     token = prefix + uuid.uuid4().hex

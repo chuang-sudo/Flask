@@ -33,7 +33,7 @@ class DevelopCofig(Config):
         'ENGINE':'mysql',
         'DRIVER':'mysqlconnector',
         'USER':'root',
-        'PASSWORD':'chuang123456',
+        'PASSWORD':'123456',
         'HOST':'localhost',
         'PORT':'3306',
         'NAME':'FlaskTpp'
@@ -114,3 +114,8 @@ ADMINS = ['chuang','root']
 UPLOADS_DIR =os.path.join(BASE_DIR,'App/static/uploads/icons')
 
 FILE_PATH_PREFIX = r'/static/uploads/icons'
+
+#Alipay
+ALIPAY_APPID = '2016101800714848'
+ALIPAY_PRIVATE_KEY = open(os.path.join(BASE_DIR, 'alipay_config/rsa_private_key.pem'), 'r').read()
+ALIPAY_PUBLIC_KEY = open(os.path.join(BASE_DIR, 'alipay_config/rsa_public_key.pem'), 'r').read()

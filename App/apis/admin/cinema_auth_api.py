@@ -2,8 +2,8 @@ from flask_restful import Resource, marshal, fields, reqparse, abort
 
 from App.apis.admin.admin_user_utils import login_require
 from App.apis.apis_constant import HTTP_OK
-from App.apis.cinema_admin.cinema_user_api import cinema_user_fields
-from App.models.cinema_admin.cinema_user_model import CinemaUser
+from App.apis.cinema.cinema_user_api import cinema_user_fields
+from App.models.cinema.cinema_user_model import CinemaUser
 
 multi_cinema_user_fields = {
     'status':fields.Integer,
